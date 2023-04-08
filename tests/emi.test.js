@@ -4,6 +4,10 @@ test('Loan is defined', () => {
   expect(EMI.Loan).toBeDefined()
 })
 
+test('Should throw an error on negative interest rate', () => {
+  expect(() => EMI.Loan(10000, -1, 10)).toThrowError('wrong parameters: 10000 -1 10')
+})
+
 test('Should calculate correct EMI installments', () => {
   const loan = EMI.Loan(10000, 12, 10)
 
@@ -17,4 +21,8 @@ test('Should calculate correct EMI installments', () => {
   expect(loan.sum).toBe(10549.89)
 
   expect(EMI.rnd(loan.principalSum + loan.interestSum)).toBe(loan.sum)
+})
+
+test('Should throw an error on negative interest rate', () => {
+  expect(() => EMI.Loan(10000, -1, 10)).toThrowError('wrong parameters: 10000 -1 10')
 })
